@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
+import AdviceForm from './components/AdviceForm';
+import AdviceDisplay from './components/AdviceDisplay';
 
-function App() {
+const App = () => {
+  const [user, setUser] = useState(null);
+
   return (
-    <div style={{ textAlign: 'center', padding: '20px' }}>
-      <h1 style={{ color: '#1a1a1a' }}>LegiWise</h1>
-      <h2 style={{ color: '#3498db' }}>🛠️ Under Construction 🛠️</h2>
-      <p>We're hard at work building a legal advice platform that offers quick, accurate, and personalized advice using cutting-edge AI technology.</p>
-      <p>🗓 Expected Launch: Q1 2024</p>
-      <p>📬 For inquiries, please email us at <a href="mailto:chuckthedeveloper@gmail.com">chuckthedeveloper@gmail.com</a></p>
-      <p>📣 <strong>Stay Updated!</strong></p>
+    <div className="App">
+      {!user ? (
+        <>
+          <h1>Login</h1>
+          <LoginForm setUser={setUser} />
+          <h1>Register</h1>
+          <RegisterForm />
+        </>
+      ) : (
+        <>
+          <h1>Ask for Advice</h1>
+          <AdviceForm />
+          <h1>Your Advice</h1>
+          <AdviceDisplay />
+        </>
+      )}
     </div>
   );
-}
+};
 
 export default App;
