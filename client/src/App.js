@@ -5,24 +5,32 @@ import AdviceForm from './components/AdviceForm';
 import AdviceDisplay from './components/AdviceDisplay';
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({ username: 'demoUser' });
 
   return (
     <div className="App">
       {!user ? (
-        <>
-          <h1>Login</h1>
-          <LoginForm setUser={setUser} />
-          <h1>Register</h1>
-          <RegisterForm />
-        </>
+        <div className="auth-section">
+          <h1>LegiWise: Wisdom in Every Word of Law</h1>
+          <div className="auth-forms">
+            <div className="login-form">
+              <h2>Login</h2>
+              <LoginForm setUser={setUser} />
+            </div>
+            <div className="register-form">
+              <h2>Register</h2>
+              <RegisterForm />
+            </div>
+          </div>
+        </div>
       ) : (
-        <>
-          <h1>Ask for Advice</h1>
+        <div className="advice-section">
+          <h1>Welcome, {user.username}</h1>
+          <h2>Ask for Advice</h2>
           <AdviceForm />
-          <h1>Your Advice</h1>
+          <h2>Your Advice</h2>
           <AdviceDisplay />
-        </>
+        </div>
       )}
     </div>
   );

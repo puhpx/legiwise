@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AdviceForm = () => {
   const [adviceQuery, setAdviceQuery] = useState('');
+  const textAreaRef = useRef(null);
+
+  useEffect(() => {
+    const textArea = textAreaRef.current;
+    textArea.style.height = 'auto';
+    textArea.style.height = textArea.scrollHeight + 'px';
+  }, [adviceQuery]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -10,8 +18,17 @@ const AdviceForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" value={adviceQuery} onChange={(e) => setAdviceQuery(e.target.value)} placeholder="Your legal question" />
-      <button type="submit">Get Advice</button>
+      <div className="form-group">
+        <textarea
+          ref={textAreaRef}
+          className="form-control"
+          style={{ minHeight: '50px', minWidth: '300px', maxWidth: '800px' }}
+          value={adviceQuery}
+          onChange={(e) => setAdviceQuery(e.target.value)}
+          placeholder="Your legal question"
+        ></textarea>
+      </div>
+      <button type="submit" className="btn btn-primary">Get Advice</button>
     </form>
   );
 };
